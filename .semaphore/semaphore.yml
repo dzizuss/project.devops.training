@@ -31,5 +31,7 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
+            - python -m venv venv
+            - source venv/bin/activate
             - pip install pip-audit
             - pip-audit -r requirements
