@@ -80,3 +80,11 @@ blocks:
           commands:
             - checkout
             - kubectl create ns aleksacolovic || true
+            - 'export DOCKER_IMAGE="$DOCKER_USER/myflaskapp:$IMAGE_VERSION"'
+            - envsubst < examples/deployment.yml > deployment.yml
+            - cat deployment.yml
+            - kubectl apply -f deployment.yml
+            - kubectl apply -f examples/service.yml
+      env_vars:
+        - name: IMAGE_VERSION
+          value: 1.0.0
