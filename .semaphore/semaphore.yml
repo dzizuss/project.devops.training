@@ -46,5 +46,5 @@ blocks:
             - python -m venv venv
             - source venv/bin/activate
             - pip install cyclonedx-bom
-            - cyclonedx-py -o sbom.xml
-            - artifact push workflow sbom.xml
+            - cyclonedx-py requirements -o sbom.json
+            - artifact push workflow sbom.json
