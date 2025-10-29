@@ -70,3 +70,13 @@ blocks:
             - 'docker build -t $DOCKER_USER/myflaskapp:$IMAGE_VERSION .'
             - 'docker push $DOCKER_USER/myflaskapp:$IMAGE_VERSION'
     dependencies: []
+  - name: Deploy application
+    dependencies: []
+    task:
+      secrets:
+        - name: kubeconfig
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - kubectl create ns aleksacolovic || true
