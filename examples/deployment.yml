@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: myapp
-          image: tomfern/final-project:latest
+          image: ${DOCKER_IMAGE}
           ports:
             - containerPort: 4000
           readinessProbe:
