@@ -31,6 +31,7 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
+            - apt install python3.10-venv
             - python -m venv venv
             - source venv/bin/activate
             - pip install pip-audit
