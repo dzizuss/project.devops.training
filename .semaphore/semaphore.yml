@@ -74,6 +74,7 @@ blocks:
     dependencies: []
     task:
       secrets:
+        - name: dockerhub
         - name: kubeconfig
       jobs:
         - name: 'Job #1'
