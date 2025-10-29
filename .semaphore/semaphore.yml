@@ -11,5 +11,6 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
+            - cache restore
             - pip install -r requirements.txt
             - cache store
