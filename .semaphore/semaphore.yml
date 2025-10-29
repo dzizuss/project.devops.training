@@ -55,18 +55,18 @@ blocks:
             - artifact push workflow sbom.json
     dependencies:
       - Vulnerability scanning
-  - name: 'Block #5'
+  - name: Upload docker image
     task:
       secrets:
         - name: dockerhub
       env_vars:
-        - name: VERSION
+        - name: IMAGE_VERSION
           value: 1.0.0
       jobs:
         - name: 'Job #1'
           commands:
             - checkout
             - docker login -u $DOCKER_USER -p $DOCKER_PASS
-            - 'docker build -t $DOCKER_USER/myflaskapp:$VERSION .'
-            - 'docker push $DOCKER_USER/myflaskapp:$VERSION'
+            - 'docker build -t $DOCKER_USER/myflaskapp:$IMAGE_VERSION .'
+            - 'docker push $DOCKER_USER/myflaskapp:$IMAGE_VERSION'
     dependencies: []
