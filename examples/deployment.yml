@@ -6,8 +6,8 @@ metadata:
   name: myflaskapp
   namespace: aleksacolovic
   labels:
-      app: myflaskapp
-  spec:
+    app: myflaskapp
+spec:
   replicas: 1
   selector:
     matchLabels:
