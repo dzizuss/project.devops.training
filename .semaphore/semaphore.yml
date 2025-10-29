@@ -67,11 +67,13 @@ blocks:
           commands:
             - checkout
             - docker login -u $DOCKER_USER -p $DOCKER_PASS
-            - 'docker build -t $DOCKER_USER/myflaskapp:$IMAGE_VERSION .'
-            - 'docker push $DOCKER_USER/myflaskapp:$IMAGE_VERSION'
-    dependencies: []
+            - 'docker build -t $DOCKER_USER/myflaskapp:$SEMAPHORE_PIPELINE_ID .'
+            - 'docker push $DOCKER_USER/myflaskapp:$SEMAPHORE_PIPELINE_ID'
+    dependencies:
+      - Generate SBOM
   - name: Deploy application
-    dependencies: []
+    dependencies:
+      - Upload docker image
     task:
       secrets:
         - name: dockerhub
@@ -81,7 +83,7 @@ blocks:
           commands:
             - checkout
             - kubectl create ns aleksacolovic || true
-            - 'export DOCKER_IMAGE="$DOCKER_USER/myflaskapp:$IMAGE_VERSION"'
+            - 'export DOCKER_IMAGE="$DOCKER_USER/myflaskapp:$SEMAPHORE_PIPELINE_ID"'
             - envsubst < examples/deployment.yml > deployment.yml
             - cat deployment.yml
             - kubectl apply -f deployment.yml
