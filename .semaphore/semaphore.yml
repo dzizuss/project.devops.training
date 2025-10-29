@@ -25,3 +25,11 @@ blocks:
             - pip install -r requirements.txt
             - sudo apt install -y pylint
             - pylint src/
+  - name: Vulnerability scanning
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - pip install pip-audit
+            - pip-audit -r requirements
