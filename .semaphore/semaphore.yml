@@ -48,3 +48,17 @@ blocks:
             - pip install cyclonedx-bom
             - cyclonedx-py requirements -o sbom.json
             - artifact push workflow sbom.json
+  - name: 'Block #5'
+    task:
+      secrets:
+        - name: dockerhub
+      env_vars:
+        - name: VERSION
+          value: 1.0.0
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - docker login -u $DOCKER_USER -p $DOCKER_PASS
+            - 'docker build -t $DOCKER_USER/myflaskapp:$VERSION'
+            - 'docker push $DOCKER_USER/myflaskapp:$VERSION'
