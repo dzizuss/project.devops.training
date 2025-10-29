@@ -3,22 +3,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: myflaskapp
   namespace: aleksacolovic
   labels:
-    app: myapp
-spec:
+      app: myflaskapp
+  spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myapp
+      app: myflaskapp
   template:
     metadata:
       labels:
-        app: myapp
+        app: myflaskapp
     spec:
       containers:
-        - name: myapp
+        - name: myflaskapp
           image: ${DOCKER_IMAGE}
           ports:
             - containerPort: 4000
