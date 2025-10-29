@@ -36,3 +36,15 @@ blocks:
             - source venv/bin/activate
             - pip install pip-audit
             - pip-audit -r requirements.txt
+  - name: Generate SBOM
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - sudo apt install -y python3.10-venv
+            - python -m venv venv
+            - source venv/bin/activate
+            - pip install cyclonedx-bom
+            - cyclonedx-py -o sbom.xml
+            - artifact push workflow sbom.xml
