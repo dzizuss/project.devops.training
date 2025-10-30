@@ -12,8 +12,8 @@ blocks:
           commands:
             - checkout
             - docker login -u $DOCKER_USER -p $DOCKER_PASS
-            - 'docker build -t $DOCKER_USER/myflaskapp:$SEMAPHORE_PIPELINE_ID .'
-            - 'docker push $DOCKER_USER/myflaskapp:$SEMAPHORE_PIPELINE_ID'
+            - 'docker build -t $DOCKER_USER/myflaskapp:$SEMAPHORE_GIT_SHA .'
+            - 'docker push $DOCKER_USER/myflaskapp:$SEMAPHORE_GIT_SHA'
       secrets:
         - name: dockerhub
 promotions:
