@@ -1,0 +1,22 @@
+version: v1.0
+name: Pipeline 3
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Deploy application
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - kubectl create ns aleksacolovic || true
+            - 'export DOCKER_IMAGE="$DOCKER_USER/myflaskapp:$SEMAPHORE_PIPELINE_ID"'
+            - envsubst < examples/deployment.yml > deployment.yml
+            - cat deployment.yml
+            - kubectl apply -f deployment.yml
+            - kubectl apply -f examples/service.yml
+      secrets:
+        - name: dockerhub
+        - name: kubeconfig

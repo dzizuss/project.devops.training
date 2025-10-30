@@ -1,0 +1,21 @@
+version: v1.0
+name: Pipeline 2
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Upload docker image
+    task:
+      jobs:
+        - name: Upload docker image
+          commands:
+            - checkout
+            - docker login -u $DOCKER_USER -p $DOCKER_PASS
+            - 'docker build -t $DOCKER_USER/myflaskapp:$SEMAPHORE_PIPELINE_ID .'
+            - 'docker push $DOCKER_USER/myflaskapp:$SEMAPHORE_PIPELINE_ID'
+      secrets:
+        - name: dockerhub
+promotions:
+  - name: Promotion 1
+    pipeline_file: pipeline_3.yml
